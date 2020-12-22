@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
+    <meta name="generator" content="Jekyll v4.1.1">
+
+    <title>AGUTTER</title>
+
+    <link rel="canonical" href="https://getbootstrap.com/docs/4.5/examples/sign-in/">
+
+    <!-- Bootstrap core CSS -->
+    <link href="bootstrap.min.css" rel="stylesheet">
+
+    <style>
+      .bd-placeholder-img {
+        font-size: 1.125rem;
+        text-anchor: middle;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+      }
+
+      @media (min-width: 768px) {
+        .bd-placeholder-img-lg {
+          font-size: 3.5rem;
+        }
+      }
+    </style>
+    <!-- Custom styles for this template -->
+    <link href="index.css" rel="stylesheet">
+  </head>
+  <body class="text-center">
+    <form class="form-signin">
+    <img class="" src="/logo.png" alt="logo" width="200" height="200">
+    <label for="inputURL" class="sr-only">URL</label>
+    <input type="url" id="inputURL1" class="form-control" value = "https://www.cbp.gov/newsroom/media-releases/all" required autofocus>
+    <input type="url" id="inputURL2" class="form-control" value="https://newsroom.abf.gov.au/" required autofocus>
+  <!-- <input type="url" id="inputURL3" class="form-control" placeholder="URL" required autofocus> -->
+  <div class="checkbox mb-3">
+
+  </div>
+  <button class="btn btn-lg btn-primary btn-block" type="submit" id="submit" >AGUTTER</button>
+</form>
+<script>
+    const URLs = Array.from(document.querySelectorAll('input')).map(values => values.defaultValue);
+    console.log(URLs);
+    const options = {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(URLs)
+    };
+    fetch('/url', options);
+
+    const button = document.getElementById('submit');
+    button.addEventListener('click', function(e){
+      e.preventDefault();
+      window.location.href = "/logs/index.html";
+      const options = {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+      };
+      fetch('/getdata', options);
+    })
+
+
+</script>
+</body>
+</html>

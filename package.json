@@ -1,0 +1,36 @@
+{
+  "name": "agutter",
+  "version": "1.0.0",
+  "description": "This the seizure data app",
+  "main": "index.js",
+  "dependencies": {
+    "@babel/polyfill": "^7.12.1",
+    "axios": "^0.21.0",
+    "cross-blob": "^2.0.0",
+    "csv-stringify": "^5.5.1",
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "image-to-base64": "^2.1.1",
+    "nedb": "^1.8.0",
+    "nodemon": "^2.0.5",
+    "puppeteer": "^5.3.1",
+    "puppeteer-core": "^5.3.1",
+    "uuid": "^8.3.1",
+    "uuidv4": "^6.2.4"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.12.1",
+    "@babel/core": "^7.12.3",
+    "@babel/preset-env": "^7.12.1"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "data",
+    "urls",
+    "seizure"
+  ],
+  "author": "Agutter",
+  "license": "MIT"
+}
