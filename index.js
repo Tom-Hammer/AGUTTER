@@ -18,6 +18,18 @@ const fs = require("fs");
 const database = new Datastore('database.db');
 database.loadDatabase();
 
+
+
+
+
+// Attach click handlers and kick off background processes
+// window.onload = function() {
+//   document.querySelector("submit").addEventListener("click", console.log("2"));
+  // document.querySelector("#clear").addEventListener("click", clear);
+
+  // setInterval(updateJobs, 200);
+// };
+
 const URLs = [];
 let usURL = [];
 let auURL = [];
@@ -43,9 +55,12 @@ app.post('/getdata', (request, response) => {
 // getContentsUS();
 async function getContentsUS() {
   console.log(usURL[0])
-  const browser = await puppeteer.launch();
+  const browser = await puppeteer.launch({
+    headless: true,
+    args: ["--no-sandbox"]
+  });
   const page = await browser.newPage();
-  await page.goto(usURL[0], {waitUntil: 'networkidle'});
+  await page.goto(usURL[0], {waitUntil: 'networkidle2'});
   const urls = await page.evaluate(() => {
     const nodeList = document.querySelectorAll('a.survey-processed[href*="-media-release"]'); // get only <a> elements that have the classname 'survey-processed' and whose 'href' attribute contains the phrase "media-release"
     return [...new Set(Array.from(nodeList).map(element => element.href))]; // convert the NodeList into an array and use 'map' to get the 'href' attributes
@@ -53,7 +68,7 @@ async function getContentsUS() {
   console.log(urls);
 
   for (const url of urls) {
-    await page.goto(url, {waitUntil: 'networkidle'});
+    await page.goto(url, {waitUntil: 'networkidle2'});
 
     const contents = await page.evaluate(() => {
       newDate = new Date(document.getElementsByClassName('date-display-single')[0].textContent.replace(/,/g," "))
@@ -76,12 +91,16 @@ async function getContentsUS() {
   await browser.close();
 };
 
+
 // getContentsAU();
 async function getContentsAU() {
   console.log(auURL[0]);
-  const browser = await puppeteer.launch();
+  const browser = await puppeteer.launch({
+    headless: true,
+    args: ["--no-sandbox"]
+  });
   const page = await browser.newPage();
-  await page.goto(auURL[0], {waitUntil: 'networkidle'});
+  await page.goto(auURL[0], {waitUntil: 'networkidle2'});
   const urls = await page.evaluate(() => {
     const nodeList = document.querySelectorAll('a[href*="releases/"]'); // get only <a> elements that have the classname 'survey-processed' and whose 'href' attribute contains the phrase "media-release"
     return [...new Set(Array.from(nodeList).map(element => element.href))]; // convert the NodeList into an array and use 'map' to get the 'href' attributes
@@ -89,7 +108,7 @@ async function getContentsAU() {
   console.log(urls);
 
   for (const url of urls) {
-    await page.goto(url, {waitUntil: 'networkidle'});
+    await page.goto(url, {waitUntil: 'networkidle2'});
 
     const contents = await page.evaluate(() => {
       const ddmmyyyy = document.getElementsByClassName('pub-date')[0].innerText;

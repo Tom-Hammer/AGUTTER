@@ -32,6 +32,7 @@
     </style>
     <!-- Custom styles for this template -->
     <link href="index.css" rel="stylesheet">
+    <!-- <script src="../index.js" async></script> -->
   </head>
   <body class="text-center">
     <form class="form-signin">
@@ -60,15 +61,40 @@
     const button = document.getElementById('submit');
     button.addEventListener('click', function(e){
       e.preventDefault();
+      console.log("click2")
       window.location.href = "/logs/index.html";
+    })
+
+    // Store for all of the jobs in progress
+    let jobs = {};
+
+    button.addEventListener('click', addJob);
+
+    // Kick off a new job by POST-ing to the server
+    async function addJob() {
+      console.log("click")
+      // let res = await fetch('job/', {method: 'POST'});
+      // let job = await res.json();
+      // jobs[job.id] = {id: job.id, state: "queued"};
+      // render();
+      
       const options = {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
+      method: 'POST',
+      headers: {
+      'Content-Type': 'application/json'
+      },
       };
       fetch('/getdata', options);
-    })
+    }
+
+      // const options = {
+      //   method: 'POST',
+      //   headers: {
+      //     'Content-Type': 'application/json'
+      //   },
+      // };
+      // fetch('/getdata', options);
+    
 
 
 </script>
